@@ -34,31 +34,11 @@ Answers three important questions for a web server that has traffic stored in lo
 
 # Views
 
-### Ratio calculator view
-``` sql
-CREATE VIEW rate AS
-SELECT all.time,
-       all.cnt AS olx,
-       failure.cnt AS failedx,
-       failure.cnt::double precision / all.cnt::double precision * 100 AS failRate
-FROM failure, all
-WHERE all.time = failure.time;
-```
-
 ### Date accumulation
 ``` sql
 CREATE VIEW total AS
 SELECT time ::date, status
 FROM log;
-```
-
-### Failed accumulation
-``` sql
-CREATE VIEW failure AS
-SELECT time, count(*) AS cnt
-FROM total
-WHERE status = '404 NOT FOUND'
-GROUP BY time;
 ```
 
 ### Success/failure accumulation
@@ -70,6 +50,26 @@ WHERE status = '200 OK'
 OR
 status = '404 NOT FOUND'
 GROUP BY time;
+```
+
+### Failed accumulation
+``` sql
+CREATE VIEW failure AS
+SELECT time, count(*) AS cnt
+FROM total
+WHERE status = '404 NOT FOUND'
+GROUP BY time;
+```
+
+### Ratio calculator view
+``` sql
+CREATE VIEW rate AS
+SELECT all.time,
+       all.cnt AS olx,
+       failure.cnt AS failedx,
+       failure.cnt::double precision / all.cnt::double precision * 100 AS failRate
+FROM failure, all
+WHERE all.time = failure.time;
 ```
 
 # Tests
