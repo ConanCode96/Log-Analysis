@@ -43,7 +43,7 @@ FROM log;
 
 ### Success/failure accumulation
 ``` sql
-CREATE VIEW all
+CREATE VIEW sucfail AS
 SELECT time, count(*) AS cnt
 FROM total
 WHERE status = '200 OK'
@@ -64,12 +64,12 @@ GROUP BY time;
 ### Ratio calculator view
 ``` sql
 CREATE VIEW rate AS
-SELECT all.time,
-       all.cnt AS olx,
+SELECT sucfail.time,
+       sucfail.cnt AS olx,
        failure.cnt AS failedx,
-       failure.cnt::double precision / all.cnt::double precision * 100 AS failRate
-FROM failure, all
-WHERE all.time = failure.time;
+       failure.cnt::double precision / sucfail.cnt::double precision * 100 AS failRate
+FROM failure, sucfail
+WHERE sucfail.time = failure.time;
 ```
 
 # Tests
