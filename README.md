@@ -27,7 +27,7 @@ Answers three important questions for a web server that has traffic stored in lo
 6) go to `\vagrant` using the command `cd \vagrant`, this folder is synced with the same vagrant folder in the configuration file you downloaded above
 5) download the database creation commands from [here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
 6) unzip and run `psql -d news -f newsdata.sql`, once finished, the database is already created and can be accessed normally
-7) `psql -d news` and run the views creation codes below
+7) `psql -d news` and run the views creation codes below in the same given order
 8) run `python logs_analyser.py`
 9) check the output against the uploaded `result.txt`
 
