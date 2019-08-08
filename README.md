@@ -73,4 +73,4 @@ GROUP BY time;
 ```
 
 # Tests
-[] PEP 8 Compatible code
+- [x] PEP 8 Compatible code
