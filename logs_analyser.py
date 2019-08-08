@@ -5,7 +5,13 @@ import psycopg2
 
 
 def ask_database(req):
-    connection = psycopg2.connect(database="news")
+    try:
+        connection = psycopg2.connect(database="news")
+    except psycopg2.Error as e:
+        print("Unable to connect to the database")
+        print(e.pgerror)
+        print(e.diag.message_detail)
+        sys.exit(1)
     cursor = connection.cursor()
     cursor.execute(req)
     res = cursor.fetchall()
