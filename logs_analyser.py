@@ -56,6 +56,7 @@ def second_question():
 
 def thrid_question():
     res = ask_database(fetch_failureRate)
+
     print("\n\t" + "Days with more than one percentage of bad requests" + "\n")
 
     for day, rate in res:
