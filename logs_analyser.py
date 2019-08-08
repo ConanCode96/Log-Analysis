@@ -36,7 +36,6 @@ fetch_failureRate = """select time, failRate
             """
 
 
-
 def first_question():
     res = ask_database(fetch_articles)
 
@@ -44,7 +43,6 @@ def first_question():
 
     for title, freq in res:
         print("\"{}\" -- {} views".format(title, freq))
-
 
 
 def second_question():
@@ -56,7 +54,6 @@ def second_question():
         print("{} -- {} views".format(name, freq))
 
 
-
 def thrid_question():
     res = ask_database(fetch_failureRate)
     print("\n\t" + "Days with more than one percentage of bad requests" + "\n")
@@ -64,7 +61,6 @@ def thrid_question():
     for day, rate in res:
         print("""{0:%B %d, %Y}
             -- {1:.2f} % errors""".format(day, rate))
-            
 
 
 if __name__ == '__main__':
